@@ -1,0 +1,19 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+/target/
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/logs/
+/nbdist/
+/.nb-gradle/
+src/test/
+/lib/

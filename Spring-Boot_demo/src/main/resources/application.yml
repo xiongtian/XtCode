@@ -1,0 +1,31 @@
+#server:
+#  port: 8081
+#person:
+#  lastName: zhangsan
+#  age: 18
+#  boss: false
+#  birthday: 2017/12/12
+#  maps: {k1: v1,k2: v2,k3: v3}
+#  list:
+#    - lisi
+#    - zhaoliu
+#  dog:
+#    name: 小狗
+#    age: 2
+
+# yml是使用文档块
+server:
+  port: 8080
+spring:
+  profiles:
+    active: dev
+---
+server:
+  port: 8083
+spring:
+  profiles: dev
+---
+server:
+  port: 8085
+spring:
+  profiles: prod

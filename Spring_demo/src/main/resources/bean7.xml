@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--bean的注解注入
+      第一步：引入AOP的依赖
+      第二步：开启组件的扫描（需要引入Context名称空间）
+      第三步： 创建类在类上添加创建对象的注解
+    -->
+    <!--开启组件扫描
+    1.如果需要扫描多个包。对个包之间使用 , 隔开
+    2.写扫描的那个包的上层目录
+    细节说明：
+
+    -->
+    <context:component-scan base-package="com.study.spring5.demo3.service"></context:component-scan>
+
+    <!--实例一
+    use-default-filters="false" 不使用默认的filter
+    include-filter:设置扫描那些内容
+    type:根据注解来扫描
+    expression:那些注解（Controller注解）
+    -->
+    <context:component-scan base-package="com.study" use-default-filters="false">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+    <!--实例二
+    下面的配置扫描包中所有内容，
+    context:exclude-filter：不包含下面这些内容
+    -->
+    <context:component-scan base-package="com.study">
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+
+</beans>

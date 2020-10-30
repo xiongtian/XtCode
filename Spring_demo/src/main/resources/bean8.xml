@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--注解注入的笔记-->
+    <!--基于注解的方式实现属性注入
+    @Autowired: 根据属性的类型进行注入;
+    @Qualifer:  根据属性的名称注入;
+    @Resource:  可以根据类型注入，可以根据名称注入;
+    @Value: 注入普通类型属性;
+
+    注意：
+    @resource是javax扩展包的
+    -->
+
+    <!--Aop的笔记-->
+
+    <!--注解的方式-->
+    <!--开启注解(组件)的扫描-->
+    <context:component-scan base-package="com.study.spring5.demo4.aop.ann"></context:component-scan>
+
+    <!--开启Aspectj生成代理对象-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+
+    <!--xml的方式-->
+    <!--创建两个类对象-->
+    <bean id="book" class="com.study.spring5.demo4.aop.xml.Book"></bean>
+
+    <bean id="bookProxy" class="com.study.spring5.demo4.aop.xml.BookProxy"></bean>
+
+    <!--配置aop的增强-->
+    <aop:config>
+        <!--配置切入点-->
+        <aop:pointcut id="p" expression="execution(* com.study.spring5.demo4.aop.xml.Book.buy(..))"/>
+        <!--配置切面
+        本例子的过程是让before()方法在buy()方法之前执行
+        -->
+        <aop:aspect ref="bookProxy">
+            <!--增强作用在具体的方上-->
+            <aop:before method="before" pointcut-ref="p"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

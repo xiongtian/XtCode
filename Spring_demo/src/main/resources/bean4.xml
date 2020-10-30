@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--IOC 操作 Bean 管理（FactoryBean）
+    Spring有两种bean，一种普通bean，另一种工厂bean(FactoryBean)
+    普通bean：在配置文件中定义bean的类型就是返回类型。
+    工厂bean：在配置文件定义bean类型可以和返回的类型不一样。
+    步骤：
+    第一步：创建类，让这个类作为工厂bean，实现接口FactoryBean
+    第二步：实现接口里面的方法，在实现的方法中定义返回的bean类型
+    -->
+
+    <bean id="myBean" class="com.study.spring5.demo2.factoryBean.MyBean"></bean>
+
+    <!--IOC操作Bean管理（bean的作用域）
+    在是spring里面，设置创建bean实例是单实例还是多实例
+    默认情况下是单实例对象,
+    在spring配置文件bean标签里面有属性（scope）用于设置单实例还是多实例
+    singleton:单实例
+    prototype:多实例
+    设置scope值是singleton时候，加载spring配置文件时就会创建单实例对象
+    设置scope值是prototype时候，不是在加载spring配置文件时创建对象，在调用getBean方法时创建多实例对象
+    需要了解：
+    request
+    session
+    -->
+    <bean id="book1" class="com.study.spring5.demo2.CollectionType.Book" scope="prototype">
+
+    </bean>
+
+
+    <!--bean的生命周期
+    1) 通过构造器创建bean实例（无参数构造）
+    2) 为bean的属性设置值和对其他bean引用（调用set方法）
+    3) 调用bean的初始化方法（需要进行配置）
+    4) bean可以使用了（对象获取到了）
+    5) 当前容器关闭的时候，调用bean的销毁的方法（需要进行配置销毁的方法）
+    -->
+    <bean id="orders" class="com.study.spring5.demo2.bean.Orders" init-method="initMethod"
+          destroy-method="destroyMethod">
+        <property name="oname" value="手机"></property>
+    </bean>
+
+    <!-- 第一步 执行无参数构造创建bean实例。
+              第二步 调用set方法设置属性值。
+              *把 bean的实例传递给bean后置处理器的方法
+              第三步 执行初始化的方法。
+              *把 bean的实例传递给bean后置处理器的方法
+              第四步 获取创建bena实例对象。
+              第五步 执行销毁方法。-->
+
+    <!--步骤：
+    1) 创建类，实现接口BeanPostProcessor，创建后置处理器
+    注意：
+    为当前配置文件中的所有bean添加后置处理器
+    -->
+
+    <bean id="myBeanPost" class="com.study.spring5.demo2.bean.MyBeanPost">
+
+    </bean>
+</beans>

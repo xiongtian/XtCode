@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--入门案例以及设置特殊值-->
+
+    <!--配置User对象创建-->
+    <bean id="user" class="com.study.spring5.demo1.User"></bean>
+
+    <!--两种注入方式：
+    1、set方法注入
+    2、带参数的构造方法注入
+    -->
+
+    <!--
+    1、set方法注入
+     1)创建对象
+     2)注入属性
+    -->
+    <bean id="book1" class="com.study.spring5.demo1.Book">
+        <property name="name" value="hahah"></property>
+        <property name="author" value="小萌"></property>
+    </bean>
+
+    <!--
+     2、带参数的构造方法注入
+     注意：使用index作为索引也可以进行注入
+        -->
+    <bean id="book2" class="com.study.spring5.demo1.Book">
+        <constructor-arg value="《java从入门到入狱》" name="name"></constructor-arg>
+        <constructor-arg value="小熊" name="author"></constructor-arg>
+    </bean>
+
+
+    <!--p名称空间的注入(了解即可)：
+    可以简化基于xml配置方式
+    1、添加一个p名称空间在xml中：
+           xmlns:p="http://www.springframework.org/schema/p"
+    2、属性注入：在bean标签中进行操作
+    -->
+    <bean id="book3" class="com.study.spring5.demo1.Book" p:name="《九阳豆浆机》" p:author="小熊熊"></bean>
+
+    <!--    注入其他类型的属性（引用 如：对象形式，集合形式）   -->
+    <!--1、字面量
+          1) 空值（null）
+          2) 属性值包含特殊符号
+
+    -->
+    <!--空值-->
+    <bean id="book4" class="com.study.spring5.demo1.Book">
+        <!--设置一个空值-->
+        <property name="name">
+            <!--<null/>标签-->
+            <null/>
+        </property>
+        <property name="author" value="小萌"></property>
+    </bean>
+    <!-- 包含特殊符号： <> -->
+    <bean id="book5" class="com.study.spring5.demo1.Book">
+        <!--设置一个空值-->
+        <!--
+        1)转义：&lt;&gt;
+        2)把带特殊符号的内容写到CDATA中去
+        -->
+        <property name="name">
+            <value><![CDATA[<<南京>>]]></value>
+        </property>
+        <property name="author" value="小萌"></property>
+    </bean>
+</beans>
