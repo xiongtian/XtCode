@@ -3,6 +3,7 @@ package com.study.day.test201012;
 import java.util.Stack;
 /*
  * 不使用递归，后续遍历
+ * 5 3 2 4 1
  * */
 public class PostOrder {
     public static void main(String[] args) {
